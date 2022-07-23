@@ -21,6 +21,8 @@
                 <input type="submit" value="Submit" name="btn_submit">
 
             </div>
+            <span>Already have an account? <a href="../dynamic/login.php">Login</a></span>
+
 
 
         </form>

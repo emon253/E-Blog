@@ -13,10 +13,13 @@
             <br> <input type="password" placeholder="Password" name="password_field" required>
 
         </div>
+
         <div class="input-box3">
             <input type="submit" value="Login" name="btn_submit">
 
         </div>
+        <span>New member? <a href="../dynamic/signup.php">Register</a> &nbsp; Here</span>
+
 
 
     </form>
