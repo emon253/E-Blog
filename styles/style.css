@@ -1,0 +1,75 @@
+/* sign up and login page design */
+.signup-form {
+    border: 1px solid yellow;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    padding: 2%;
+} 
+
+.signup-form input{
+    margin-top: 25px;
+    border: 1px solid green;
+}
+.inputBox1>input {
+    width: 200px;
+    height: 30px;
+}
+
+.input-box2 > input{
+    width: 405px;
+    height: 30px;
+
+}
+.input-box3 > input{
+width: 150px;
+height: 35px;
+}
+.input-box3 > input:hover{
+    background-color: aliceblue;
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+/* sign up and login page design ends */
+
+
+/* post card styles start*/
+/*CSS to limit the text length inside a div*/
+.text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    /* number of lines to show */
+    -webkit-box-orient: vertical;
+}
+
+/* post card styles end*/
+
+/* blogs style starts */
+.posts {
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    background-color: rgb(252, 248, 248);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.scroll-posts {
+    overflow-y: scroll;
+}
+.scroll-posts::-webkit-scrollbar {
+    display: none;
+}
+.cs2{
+    width: 60%;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 4px;
+    text-align: justify;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+
+/* blogs style ends */
+
+
