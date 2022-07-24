@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!doctype html>
 <html lang="en">
 
@@ -8,7 +10,16 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        #body {
+            font-family: 'Times New Roman', Times, serif;
 
+        }
+
+        a {
+            text-decoration: none;
+        }
+    </style>
     <link rel="stylesheet" href="../../styles/style.css">
     <title>e-blog</title>
 </head>
@@ -38,6 +49,19 @@
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
                 <?php } ?>
+                <?php
+                if (@$_SESSION['userName'] != "") {
+
+                ?>
+                    <div  class="d-flex" style="margin-left: auto">
+                        <span>[ <a href="#"><?php echo $_SESSION['userName']; ?></a> ]</span> &nbsp;
+                        <a href="/E-Blog/includes/actions/LogoutAction.php" value="Logout" name="btn_logout">Logout</a>
+
+                </div>
+                <?php
+                }
+                ?>
+
             </div>
 
         </div>

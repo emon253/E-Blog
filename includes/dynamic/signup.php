@@ -6,7 +6,7 @@
             <h2 >Register</h2>
             <hr class="hr-line">
         </div>
-        <form action="./pages/action_pages/SignupAction.php" method="POST">
+        <form action="../actions/SignupAction.php" method="POST">
             <div class="inputBox1">
                 <input type="text" placeholder="Full Name" name="name_field" required> <input type="number" placeholder="Mobile Number" name="num_field" required>
 
@@ -22,7 +22,6 @@
 
             </div>
             <span>Already have an account? <a href="../dynamic/login.php">Login</a></span>
-
 
 
         </form>
