@@ -12,7 +12,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <style>
         #body {
-            font-family: 'Times New Roman', Times, serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
         }
 
@@ -20,7 +20,7 @@
             text-decoration: none;
         }
     </style>
-    <link rel="stylesheet" href="../../styles/style.css">
+    <link rel="stylesheet" href="styles/style.css">
     <title>e-blog</title>
 </head>
 
@@ -28,15 +28,15 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light " style="background-color: rgb(255, 245, 245);">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/E-Blog">E BLOG</a>
+            <a class="navbar-brand" href="/E-Blog?page=home">E BLOG</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-link active" aria-current="page" href="/E-Blog">Home</a>
-                    <a class="nav-link" href="/E-Blog/includes/dynamic/blog.php">Blogs</a>
-                    <a class="nav-link" href="#">About</a>
+                    <a class="nav-link active" aria-current="page" href="?page=home">Home</a>
+                    <a class="nav-link" href="/E-Blog?page=blogs">Blogs</a>
+                    <a class="nav-link" href="/E-Blog?page=about">About</a>
                 </div>
                 <?php
                 $curPageName = substr($_SERVER["SCRIPT_NAME"], strrpos($_SERVER["SCRIPT_NAME"], "/") + 1);

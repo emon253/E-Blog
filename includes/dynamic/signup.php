@@ -1,5 +1,4 @@
 
-<?php include '../layout/header.php';?>
 
     <div class="signup-form mt-5">
         <div class="form-head">
@@ -21,11 +20,10 @@
                 <input type="submit" value="Submit" name="btn_submit">
 
             </div>
-            <span>Already have an account? <a href="../dynamic/login.php">Login</a></span>
+            <span>Already have an account? <a href="?page=login">Login</a></span>
 
 
         </form>
     </div>
 
 
-    <?php include '../layout/footer.php';?>
