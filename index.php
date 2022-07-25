@@ -4,7 +4,7 @@ include './includes/layout/header.php';
 
 @$page = $_GET['page'];
 
-if($page == 'home'){
+if($page == ''){
     require_once './includes/layout/home.php';
 }else if($page == 'blogs'){
     require_once ('./includes/dynamic/blog.php');

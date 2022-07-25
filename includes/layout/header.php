@@ -28,15 +28,15 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light " style="background-color: rgb(255, 245, 245);">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/E-Blog?page=home">E BLOG</a>
+            <a class="navbar-brand" href="index.php">E BLOG</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-link active" aria-current="page" href="?page=home">Home</a>
-                    <a class="nav-link" href="/E-Blog?page=blogs">Blogs</a>
-                    <a class="nav-link" href="/E-Blog?page=about">About</a>
+                    <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+                    <a class="nav-link" href="?page=blogs">Blogs</a>
+                    <a class="nav-link" href="?page=about">About</a>
                 </div>
                 <?php
                 $curPageName = substr($_SERVER["SCRIPT_NAME"], strrpos($_SERVER["SCRIPT_NAME"], "/") + 1);

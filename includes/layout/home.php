@@ -9,8 +9,8 @@
 
                 ?>
                 <div class="banner-btn text-center">
-                    <a href="/E-Blog?page=login" class="btn btn-primary ps-5 pe-5" role="button" aria-disabled="true">Login</a>
-                    <a href="/E-Blog?page=signup" class="btn btn-secondary ps-5 pe-5" role="button" aria-disabled="true">Signup</a>
+                    <a href="?page=login" class="btn btn-primary ps-5 pe-5" role="button" aria-disabled="true">Login</a>
+                    <a href="?page=signup" class="btn btn-secondary ps-5 pe-5" role="button" aria-disabled="true">Signup</a>
                 </div>
                 <?php
              

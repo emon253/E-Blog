@@ -5,7 +5,7 @@
         <h2>Login</h2>
         <hr class="hr-line">
     </div>
-    <form action="../actions/LoginAction.php" method="POST">
+    <form action="includes/actions/LoginAction.php" method="POST">
       <!-- error showing   -->
       <?php if (@$_SESSION['loginErrMsg'] != "")
         
