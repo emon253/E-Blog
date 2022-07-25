@@ -18,7 +18,6 @@ if (isset($_POST['btn_login']) == "Login") {
     }else{
         $_SESSION['loginMsg'] = "Invlaid email or password";
         header('location: /E-Blog/index.php?page=login');
-
     }
 
    

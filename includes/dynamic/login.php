@@ -1,22 +1,19 @@
-
-
 <div class="signup-form mt-5">
     <div class="form-head">
         <h2>Login</h2>
         <hr class="hr-line">
     </div>
     <form action="includes/actions/LoginAction.php" method="POST">
-      <!-- error showing   -->
-      <?php if (@$_SESSION['loginMsg'] != "")
-        
-        { ?>
+        <!-- error showing   -->
+        <?php if (@$_SESSION['loginMsg'] != "") { ?>
 
-        <div class="alert alert-warning" role="alert">
-            <?php echo $_SESSION['loginMsg']; ?>
-        </div>
+            <div class="alert alert-warning" role="alert">
+                <?= $_SESSION['loginMsg']; ?>
+            </div>
 
-        <?php  $_SESSION['loginMsg'] = ""; } ?>
-      <!-- error showing   -->
+        <?php $_SESSION['loginMsg'] = "";
+        } ?>
+        <!-- error showing   -->
 
 
         <div class="input-box2">
@@ -35,5 +32,3 @@
 
     </form>
 </div>
-
-

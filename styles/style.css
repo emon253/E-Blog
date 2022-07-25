@@ -109,4 +109,17 @@
   /* number of lines to show */
   -webkit-box-orient: vertical;
 }
+
+.cs3{
+
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 4px;
+  text-align: justify;
+  background-color: rgb(249, 243, 243);
+
+}
+
+
 /*profile styling ends */

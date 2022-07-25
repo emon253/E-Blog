@@ -6,11 +6,11 @@
             <?php $user = $_SESSION['user']; ?>
 
             <div class="header-info">
-                <h1><?php echo $user->full_name ?></h1>
+                <h1><?= $user->full_name ?></h1>
                 <p>Email:
-                    <?php echo $user->email ?>
+                    <?= $user->email ?>
                 </p>
-                <p>Phone: <?php echo $user->phone ?> </p>
+                <p>Phone: <?= $user->phone ?> </p>
             </div>
 
             <!-- Button trigger modal -->
@@ -27,8 +27,8 @@
                         <div class="modal-body">
 
                             <form action="includes/actions/SignupAction.php" method="POST">
-                              Name <input type="text" value="<?php echo $user->full_name ?>"><br><br>
-                              Phone <input type="number"  value="<?php echo $user->phone ?>"> <br> <br>
+                              Name <input type="text" value="<?= $user->full_name ?>"><br><br>
+                              Phone <input type="number"  value="<?= $user->phone ?>"> <br> <br>
                               <input type="submit" value="Submit">
 
                             </form>
