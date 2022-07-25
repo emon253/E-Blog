@@ -50,11 +50,11 @@
                     </form>
                 <?php } ?>
                 <?php
-                if (@$_SESSION['userName'] != "") {
+                if (@$_SESSION['user'] != "") {
 
                 ?>
                     <div  class="d-flex" style="margin-left: auto">
-                        <span>[ <a href="#"><?php echo $_SESSION['userName']; ?></a> ]</span> &nbsp;
+                        <span>[ <a href="?page=usr"><?php echo $_SESSION['user']->full_name; ?></a> ]</span> &nbsp;
                         <a href="/E-Blog/includes/actions/LogoutAction.php" value="Logout" name="btn_logout">Logout</a>
 
                 </div>

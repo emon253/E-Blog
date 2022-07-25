@@ -13,9 +13,10 @@ if (isset($_POST['btn_submit']) == "Submit") {
     $insertSQL = "INSERT INTO users VALUES($data)";
     $insertQuery = @mysqli_query($dbCon,$insertSQL) or die("Error in Table Info Insertion: ".mysqli_error($dbCon));
     if($insertQuery){
-		$_SESSION['userName'] = "$fullName";
-	}
+      
+      $_SESSION['loginMsg'] = "Registration Success! You Can Login Now.";
+    }
 }
-header('location: /E-Blog')
+header('location: /E-Blog/index.php?page=login');
 
 ?>

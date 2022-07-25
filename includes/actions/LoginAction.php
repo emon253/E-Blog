@@ -13,11 +13,11 @@ if (isset($_POST['btn_login']) == "Login") {
     $executeQuery = mysqli_query($dbCon,$sql);
 	$user = mysqli_fetch_object($executeQuery);
     if($user->password === $password){
-        $_SESSION['userName'] = "$user->full_name";
+        $_SESSION['user'] = $user;
         header('location: /E-Blog');
     }else{
-        $_SESSION['loginErrMsg'] = "Invlaid email or password";
-        header('location: /E-Blog/includes/dynamic/login.php');
+        $_SESSION['loginMsg'] = "Invlaid email or password";
+        header('location: /E-Blog/index.php?page=login');
 
     }
 

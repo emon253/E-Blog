@@ -7,15 +7,15 @@
     </div>
     <form action="includes/actions/LoginAction.php" method="POST">
       <!-- error showing   -->
-      <?php if (@$_SESSION['loginErrMsg'] != "")
+      <?php if (@$_SESSION['loginMsg'] != "")
         
         { ?>
 
         <div class="alert alert-warning" role="alert">
-            <?php echo $_SESSION['loginErrMsg']; ?>
+            <?php echo $_SESSION['loginMsg']; ?>
         </div>
 
-        <?php  $_SESSION['loginErrMsg'] = ""; } ?>
+        <?php  $_SESSION['loginMsg'] = ""; } ?>
       <!-- error showing   -->
 
 

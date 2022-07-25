@@ -5,7 +5,7 @@
             <div class="carousel-item carousel-img active">
                 <img src="./images/banner.png" class="d-block w-100" alt="...">
                 <?php
-                if (@$_SESSION['userName'] == "") {
+                if (@$_SESSION['user'] == "") {
 
                 ?>
                 <div class="banner-btn text-center">

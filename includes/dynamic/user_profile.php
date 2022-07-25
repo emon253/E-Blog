@@ -1,14 +1,44 @@
+<?php require_once('./includes/actions/UserProfileAction.php') ?>
 <div class="container  ">
     <div class="user-profile scroll-posts">
         <div class="profile-header ">
             <img src="images/user_img.png" alt="user">
-            <div class="header-info">
-                <h1>Yasin Chowdhury</h1>
-                <p>Email: yasinchowdhury@gmail.com</p>
-                <p>Phone: 01795309271 </p>
+            <?php $user = $_SESSION['user']; ?>
 
+            <div class="header-info">
+                <h1><?php echo $user->full_name ?></h1>
+                <p>Email:
+                    <?php echo $user->email ?>
+                </p>
+                <p>Phone: <?php echo $user->phone ?> </p>
             </div>
-            <a href="?user=10">Edit Profile</a>
+
+            <!-- Button trigger modal -->
+            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Edit Profile</a>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Edit User</h5>
+                        </div>
+                        <div class="modal-body">
+
+                            <form action="includes/actions/SignupAction.php" method="POST">
+                              Name <input type="text" value="<?php echo $user->full_name ?>"><br><br>
+                              Phone <input type="number"  value="<?php echo $user->phone ?>"> <br> <br>
+                              <input type="submit" value="Submit">
+
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
 
         </div>
 
@@ -16,7 +46,7 @@
 
         <!-- my posts section  -->
         <div class="row row-cols-1 row-cols-md-4 g-4 mt-2 ps-5 pe-5">
-        <div class="col">
+            <div class="col">
                 <div class="card">
                     <div class="card-body my-blog-text">
                         <p class="card-title" style="font-weight: bold;">কনসিস্টেন্ট হ্যাশিং সার্ভারে লোড ব্যালেন্স করার একটি অ্যালগরিদম।</p>
