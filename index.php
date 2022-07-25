@@ -12,6 +12,8 @@ if($page == ''){
     require_once './includes/dynamic/login.php';
 }else if($page=='signup'){
     require_once './includes/dynamic/signup.php';
+}else if($page=='about'){
+    require_once './includes/dynamic/user_profile.php';
 }else{
     echo '<h2> 404 NOT FOUND</h2>';
 }

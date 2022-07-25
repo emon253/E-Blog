@@ -40,7 +40,7 @@
                 </div>
                 <?php
                 $curPageName = substr($_SERVER["SCRIPT_NAME"], strrpos($_SERVER["SCRIPT_NAME"], "/") + 1);
-                if ($curPageName === 'blog.php') {
+                if ($curPageName != 'index.php' && $_GET['page'] == 'blogs') {
 
 
                 ?>
