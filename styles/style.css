@@ -67,6 +67,15 @@
 .scroll-posts::-webkit-scrollbar {
   display: none;
 }
+.blog-container{
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
+.blog-container > p{
+  text-align: justify;
+}
+
 
 /* blogs style ends */
 
@@ -123,3 +132,42 @@
 
 
 /*profile styling ends */
+
+/* about us */
+
+.box-style{
+
+  /*background-color: rgba(245, 245, 245, 0.459);*/
+  height: 70%;
+  width: 100%;
+  margin-top: 50px;
+  
+}
+.br{
+  border-radius: 8px;
+}
+.fun .img{
+  height: 250px;
+  width: 50px;
+}
+
+.bc{
+  background-color: #273746;
+  color: white;
+}
+.eg{
+  background-color: #EEEEEE;
+  height: 70%;
+  width: 100%;
+  margin-top: 50px;
+  padding: 20px;
+  
+}
+.mg{
+  margin-left: 200px;
+}
+.mt{
+  margin-top: 50px;
+}
+
+/* about us */

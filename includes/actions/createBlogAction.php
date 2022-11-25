@@ -11,13 +11,13 @@ if (isset($_POST['btn_post']) == "post") {
     $message = $_POST['msg'];
     
 
-    $data = "'0','$user->user_id', '$title', '$message'";
+    $data = "'NULL','$user->user_id', '$title', '$message'";
     $insertSQL = "INSERT INTO posts VALUES($data)";
     $insertQuery = @mysqli_query($dbCon,$insertSQL) or die("Error in Table Info Insertion: ".mysqli_error($dbCon));
-    
+    header('location: /E-Blog/index.php?page=blogs');
+
 }
 
-header('location: /E-Blog/index.php?page=blogs');
 
 
 ?>

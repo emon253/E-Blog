@@ -28,7 +28,5 @@
         </div>
         <span>New member? <a href="?page=signup">Register</a> &nbsp; Here</span>
 
-
-
     </form>
 </div>

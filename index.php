@@ -14,6 +14,13 @@ if($page == ''){
     require_once './includes/dynamic/signup.php';
 }else if($page=='usr'){
     require_once './includes/dynamic/user_profile.php';
+}else if($page=='blog'){
+    require_once './includes/dynamic/blog_view.php';
+}
+else if($page=='edit'){
+    require_once './includes/dynamic/update_blog.php';
+}else if($page=='about'){
+    require_once './includes/dynamic/aboutUs.php';
 }else{
     echo '<h2> 404 NOT FOUND</h2>';
 }

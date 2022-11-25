@@ -5,7 +5,7 @@
     </div>
     <form action="includes/actions/SignupAction.php" method="POST">
         <div class="inputBox1">
-            <input type="text" placeholder="Full Name" name="name_field" required> <input type="number" placeholder="Mobile Number" name="num_field" required>
+            <input type="text" placeholder="Full Name" name="name_field" required> <input type="tel" placeholder="Mobile Number" name="num_field" required>
 
         </div>
 

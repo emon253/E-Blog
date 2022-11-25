@@ -9,14 +9,17 @@ if (isset($_POST['btn_submit']) == "Submit") {
     $email = $_POST['email_field'];	
     $password = $_POST['password_field'];	
 
-    $data = "'0', '$fullName', '$phone', '$email', '$password'";
-    $insertSQL = "INSERT INTO users VALUES($data)";
+    $data = "'NULL', '$fullName', '$phone', '$email', '$password'";
+
+    $insertSQL = "INSERT INTO users VALUES ($data)";
+    echo $insertSQL;
+
     $insertQuery = @mysqli_query($dbCon,$insertSQL) or die("Error in Table Info Insertion: ".mysqli_error($dbCon));
     if($insertQuery){
       
       $_SESSION['loginMsg'] = "Registration Success! You Can Login Now.";
     }
 }
-header('location: /E-Blog/index.php?page=login');
+  header('location: /E-Blog/index.php?page=login');
 
 ?>

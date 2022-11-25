@@ -39,25 +39,26 @@
                     <a class="nav-link" href="?page=about">About</a>
                 </div>
                 <?php
-                $curPageName = substr($_SERVER["SCRIPT_NAME"], strrpos($_SERVER["SCRIPT_NAME"], "/") + 1);
-                
-                if ( isset($_GET['page']) && $_GET['page']  == 'blogs') {
+
+                if (isset($_GET['page']) && $_GET['page']  == 'blogs') {
 
                 ?>
-                    <form class="d-flex" style="margin-left: 25%;">
-                        <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    <form method="POST" action="" class="d-flex" style="margin-left: 25%;">
+                        <input class="form-control me-2 " name="searchKey" type="search" placeholder="Search" aria-label="Search">
+                        <input name="page" value="blogs" type="hidden">
+                        <button class="btn btn-outline-success" name="btn_search" value="Search" type="submit">Search</button>
                     </form>
                 <?php } ?>
                 <?php
-                if (@$_SESSION['user'] != "") {
+                $user =  @$_SESSION['user'];
+                if ($user != "") {
 
                 ?>
-                    <div  class="d-flex" style="margin-left: auto">
+                    <div class="d-flex" style="margin-left: auto">
                         <span>[ <a href="?page=usr"><?= $_SESSION['user']->full_name; ?></a> ]</span> &nbsp;
                         <a href="/E-Blog/includes/actions/LogoutAction.php" value="Logout" name="btn_logout">Logout</a>
 
-                </div>
+                    </div>
                 <?php
                 }
                 ?>

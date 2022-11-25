@@ -12,6 +12,7 @@ if (isset($_POST['btn_login']) == "Login") {
     
     $executeQuery = mysqli_query($dbCon,$sql);
 	$user = mysqli_fetch_object($executeQuery);
+    
     if($user->password === $password){
         $_SESSION['user'] = $user;
         header('location: /E-Blog');

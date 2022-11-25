@@ -1,249 +1,90 @@
-<?php require_once('./includes/actions/UserProfileAction.php') ?>
+<?php require_once('./includes/actions/UserProfileAction.php');
+$sql = "SELECT * FROM users WHERE user_id = '$user->user_id'";
+$executeQuery = mysqli_query($dbCon,$sql);
+$usr = mysqli_fetch_object($executeQuery);
+$_SESSION['user'] = $usr;
+
+?>
 <div class="container  ">
     <div class="user-profile scroll-posts">
         <div class="profile-header ">
             <img src="images/user_img.png" alt="user">
-            <?php $user = $_SESSION['user']; ?>
+            
 
             <div class="header-info">
-                <h1><?= $user->full_name ?></h1>
+                <h1><?= $usr->full_name ?></h1>
                 <p>Email:
-                    <?= $user->email ?>
+                    <?= $usr->email ?>
                 </p>
-                <p>Phone: <?= $user->phone ?> </p>
+                <p>Phone: 0<?= $usr->phone ?> </p>
             </div>
 
             <!-- Button trigger modal -->
             <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Edit Profile</a>
 
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Edit User</h5>
-                        </div>
-                        <div class="modal-body">
-
-                            <form action="includes/actions/SignupAction.php" method="POST">
-                              Name <input type="text" value="<?= $user->full_name ?>"><br><br>
-                              Phone <input type="number"  value="<?= $user->phone ?>"> <br> <br>
-                              <input type="submit" value="Submit">
-
-                            </form>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
 
 
         </div>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Edit User</h5>
+                    </div>
+                    <div class="modal-body">
+
+                        <form action="includes/actions/UserProfileAction.php?usr=10" method="POST">
+                            Name <input type="hidden" name="id" value="<?= $usr->user_id ?>">
+                            Name <input type="text" name="name" value="<?= $usr->full_name ?>"><br><br>
+                            Phone <input type="number" name="phone" value="<?= $usr->phone ?>"> <br> <br>
+                            <input type="submit" name="btn_update" value="Update">
+
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
 
 
 
         <!-- my posts section  -->
+
+
         <div class="row row-cols-1 row-cols-md-4 g-4 mt-2 ps-5 pe-5">
-            <div class="col">
-                <div class="card">
-                    <div class="card-body my-blog-text">
-                        <p class="card-title" style="font-weight: bold;">কনসিস্টেন্ট হ্যাশিং সার্ভারে লোড ব্যালেন্স করার একটি অ্যালগরিদম।</p>
+            <?php
+            require_once('./includes/actions/GetBlogsAction.php');
+            if ($number_of_posts > 0) {
+                while ($post = mysqli_fetch_object($executeQuery)) {
+                    if ($post->user_id == $_SESSION['user']->user_id) {
+            ?>
 
-                        <div class="card-text "> এটা ব্যবহার করে নিশ্চিত করা হয় ডিস্ট্রিবিউটেড সিস্টেমে নতুন সার্ভার যোগ করলে বা কোন সার্ভার ডাউন হয়ে গেলে অন্যান্য সার্ভারের উপর যতটা সম্ভব কম প্রভাব পরে। এই লেখায় আমি বেসিক হ্যাশিং নিয়ে তেমন আলোচনা করবো না, আমি আলোচনা করবো কনসিস্টেন্ট হ্যাশিং কিভাবে কাজ করে এবং কি ধরণের সমস্যা সমাধান করতে এটা কাজে লাগে সেটা নিয়ে। শুরুতেই অ্যালগরিদম বর্ণনা করা আগে আমি কিছু ব্যাকগ্রাউন্ড দিয়ে শুরু করবো যাতে তুমি বুঝতে পারো ঠিক কোন সমস্যা সমাধান করার জন্য এটা ব্যবহার করা হয়। কনসিস্টেন্ট হ্যাশিং এর একটা খুবই কমন ব্যবহার হলো ডিস্ট্রিবি...</div>
-                    </div>
-                    <div class="card-footer">
-                        <a href="#">Edit</a>
-                        <a href="#">Delete</a>
-                    </div>
-                </div>
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-body my-blog-text">
+                                    <p class="card-title" style="font-weight: bold;"><?= $post->title ?></p>
 
-            </div>
+                                    <div class="card-text "><?= $post->content ?></div>
+                                </div>
+                                <div class="card-footer text-center">
+                                    <a class="ms-2" href="?page=edit&post=<?= $post->post_id ?>">Edit</a>
+                                    <a class="ms-3" href="/E-Blog/includes/actions/DeleteBlogAction.php?p=<?= $post->post_id ?>">Delete</a>
+                                    <a class="ms-3" href="?page=blog&p=<?= $post->post_id ?>">View</a>
+                                </div>
+                            </div>
 
-            <div class="col">
-                <div class="card">
-                    <div class="card-body my-blog-text">
-                        <p class="card-title" style="font-weight: bold;">কনসিস্টেন্ট হ্যাশিং সার্ভারে লোড ব্যালেন্স করার একটি অ্যালগরিদম।</p>
-
-                        <div class="card-text "> এটা ব্যবহার করে নিশ্চিত করা হয় ডিস্ট্রিবিউটেড সিস্টেমে নতুন সার্ভার যোগ করলে বা কোন সার্ভার ডাউন হয়ে গেলে অন্যান্য সার্ভারের উপর যতটা সম্ভব কম প্রভাব পরে। এই লেখায় আমি বেসিক হ্যাশিং নিয়ে তেমন আলোচনা করবো না, আমি আলোচনা করবো কনসিস্টেন্ট হ্যাশিং কিভাবে কাজ করে এবং কি ধরণের সমস্যা সমাধান করতে এটা কাজে লাগে সেটা নিয়ে। শুরুতেই অ্যালগরিদম বর্ণনা করা আগে আমি কিছু ব্যাকগ্রাউন্ড দিয়ে শুরু করবো যাতে তুমি বুঝতে পারো ঠিক কোন সমস্যা সমাধান করার জন্য এটা ব্যবহার করা হয়। কনসিস্টেন্ট হ্যাশিং এর একটা খুবই কমন ব্যবহার হলো ডিস্ট্রিবি...</div>
-                    </div>
-                    <div class="card-footer">
-                        <a href="#">Edit</a>
-                        <a href="#">Delete</a>
-                    </div>
-                </div>
-
-            </div>
-            <div class="col">
-                <div class="card">
-                    <div class="card-body my-blog-text">
-                        <p class="card-title" style="font-weight: bold;">কনসিস্টেন্ট হ্যাশিং সার্ভারে লোড ব্যালেন্স করার একটি অ্যালগরিদম।</p>
-
-                        <div class="card-text "> এটা ব্যবহার করে নিশ্চিত করা হয় ডিস্ট্রিবিউটেড সিস্টেমে নতুন সার্ভার যোগ করলে বা কোন সার্ভার ডাউন হয়ে গেলে অন্যান্য সার্ভারের উপর যতটা সম্ভব কম প্রভাব পরে। এই লেখায় আমি বেসিক হ্যাশিং নিয়ে তেমন আলোচনা করবো না, আমি আলোচনা করবো কনসিস্টেন্ট হ্যাশিং কিভাবে কাজ করে এবং কি ধরণের সমস্যা সমাধান করতে এটা কাজে লাগে সেটা নিয়ে। শুরুতেই অ্যালগরিদম বর্ণনা করা আগে আমি কিছু ব্যাকগ্রাউন্ড দিয়ে শুরু করবো যাতে তুমি বুঝতে পারো ঠিক কোন সমস্যা সমাধান করার জন্য এটা ব্যবহার করা হয়। কনসিস্টেন্ট হ্যাশিং এর একটা খুবই কমন ব্যবহার হলো ডিস্ট্রিবি...</div>
-                    </div>
-                    <div class="card-footer">
-                        <a href="#">Edit</a>
-                        <a href="#">Delete</a>
-                    </div>
-                </div>
-
-            </div>
-            <div class="col">
-                <div class="card">
-                    <div class="card-body my-blog-text">
-                        <p class="card-title" style="font-weight: bold;">কনসিস্টেন্ট হ্যাশিং সার্ভারে লোড ব্যালেন্স করার একটি অ্যালগরিদম।</p>
-
-                        <div class="card-text "> এটা ব্যবহার করে নিশ্চিত করা হয় ডিস্ট্রিবিউটেড সিস্টেমে নতুন সার্ভার যোগ করলে বা কোন সার্ভার ডাউন হয়ে গেলে অন্যান্য সার্ভারের উপর যতটা সম্ভব কম প্রভাব পরে। এই লেখায় আমি বেসিক হ্যাশিং নিয়ে তেমন আলোচনা করবো না, আমি আলোচনা করবো কনসিস্টেন্ট হ্যাশিং কিভাবে কাজ করে এবং কি ধরণের সমস্যা সমাধান করতে এটা কাজে লাগে সেটা নিয়ে। শুরুতেই অ্যালগরিদম বর্ণনা করা আগে আমি কিছু ব্যাকগ্রাউন্ড দিয়ে শুরু করবো যাতে তুমি বুঝতে পারো ঠিক কোন সমস্যা সমাধান করার জন্য এটা ব্যবহার করা হয়। কনসিস্টেন্ট হ্যাশিং এর একটা খুবই কমন ব্যবহার হলো ডিস্ট্রিবি...</div>
-                    </div>
-                    <div class="card-footer">
-                        <a href="#">Edit</a>
-                        <a href="#">Delete</a>
-                    </div>
-                </div>
-
-            </div>
-            <div class="col">
-                <div class="card">
-                    <div class="card-body my-blog-text">
-                        <p class="card-title" style="font-weight: bold;">কনসিস্টেন্ট হ্যাশিং সার্ভারে লোড ব্যালেন্স করার একটি অ্যালগরিদম।</p>
-
-                        <div class="card-text "> এটা ব্যবহার করে নিশ্চিত করা হয় ডিস্ট্রিবিউটেড সিস্টেমে নতুন সার্ভার যোগ করলে বা কোন সার্ভার ডাউন হয়ে গেলে অন্যান্য সার্ভারের উপর যতটা সম্ভব কম প্রভাব পরে। এই লেখায় আমি বেসিক হ্যাশিং নিয়ে তেমন আলোচনা করবো না, আমি আলোচনা করবো কনসিস্টেন্ট হ্যাশিং কিভাবে কাজ করে এবং কি ধরণের সমস্যা সমাধান করতে এটা কাজে লাগে সেটা নিয়ে। শুরুতেই অ্যালগরিদম বর্ণনা করা আগে আমি কিছু ব্যাকগ্রাউন্ড দিয়ে শুরু করবো যাতে তুমি বুঝতে পারো ঠিক কোন সমস্যা সমাধান করার জন্য এটা ব্যবহার করা হয়। কনসিস্টেন্ট হ্যাশিং এর একটা খুবই কমন ব্যবহার হলো ডিস্ট্রিবি...</div>
-                    </div>
-                    <div class="card-footer">
-                        <a href="#">Edit</a>
-                        <a href="#">Delete</a>
-                    </div>
-                </div>
-
-            </div>
-            <div class="col">
-                <div class="card">
-                    <div class="card-body my-blog-text">
-                        <p class="card-title" style="font-weight: bold;">কনসিস্টেন্ট হ্যাশিং সার্ভারে লোড ব্যালেন্স করার একটি অ্যালগরিদম।</p>
-
-                        <div class="card-text "> এটা ব্যবহার করে নিশ্চিত করা হয় ডিস্ট্রিবিউটেড সিস্টেমে নতুন সার্ভার যোগ করলে বা কোন সার্ভার ডাউন হয়ে গেলে অন্যান্য সার্ভারের উপর যতটা সম্ভব কম প্রভাব পরে। এই লেখায় আমি বেসিক হ্যাশিং নিয়ে তেমন আলোচনা করবো না, আমি আলোচনা করবো কনসিস্টেন্ট হ্যাশিং কিভাবে কাজ করে এবং কি ধরণের সমস্যা সমাধান করতে এটা কাজে লাগে সেটা নিয়ে। শুরুতেই অ্যালগরিদম বর্ণনা করা আগে আমি কিছু ব্যাকগ্রাউন্ড দিয়ে শুরু করবো যাতে তুমি বুঝতে পারো ঠিক কোন সমস্যা সমাধান করার জন্য এটা ব্যবহার করা হয়। কনসিস্টেন্ট হ্যাশিং এর একটা খুবই কমন ব্যবহার হলো ডিস্ট্রিবি...</div>
-                    </div>
-                    <div class="card-footer">
-                        <a href="#">Edit</a>
-                        <a href="#">Delete</a>
-                    </div>
-                </div>
-
-            </div>
-            <div class="col">
-                <div class="card">
-                    <div class="card-body my-blog-text">
-                        <p class="card-title" style="font-weight: bold;">কনসিস্টেন্ট হ্যাশিং সার্ভারে লোড ব্যালেন্স করার একটি অ্যালগরিদম।</p>
-
-                        <div class="card-text "> এটা ব্যবহার করে নিশ্চিত করা হয় ডিস্ট্রিবিউটেড সিস্টেমে নতুন সার্ভার যোগ করলে বা কোন সার্ভার ডাউন হয়ে গেলে অন্যান্য সার্ভারের উপর যতটা সম্ভব কম প্রভাব পরে। এই লেখায় আমি বেসিক হ্যাশিং নিয়ে তেমন আলোচনা করবো না, আমি আলোচনা করবো কনসিস্টেন্ট হ্যাশিং কিভাবে কাজ করে এবং কি ধরণের সমস্যা সমাধান করতে এটা কাজে লাগে সেটা নিয়ে। শুরুতেই অ্যালগরিদম বর্ণনা করা আগে আমি কিছু ব্যাকগ্রাউন্ড দিয়ে শুরু করবো যাতে তুমি বুঝতে পারো ঠিক কোন সমস্যা সমাধান করার জন্য এটা ব্যবহার করা হয়। কনসিস্টেন্ট হ্যাশিং এর একটা খুবই কমন ব্যবহার হলো ডিস্ট্রিবি...</div>
-                    </div>
-                    <div class="card-footer">
-                        <a href="#">Edit</a>
-                        <a href="#">Delete</a>
-                    </div>
-                </div>
-
-            </div>
-            <div class="col">
-                <div class="card">
-                    <div class="card-body my-blog-text">
-                        <p class="card-title" style="font-weight: bold;">কনসিস্টেন্ট হ্যাশিং সার্ভারে লোড ব্যালেন্স করার একটি অ্যালগরিদম।</p>
-
-                        <div class="card-text "> এটা ব্যবহার করে নিশ্চিত করা হয় ডিস্ট্রিবিউটেড সিস্টেমে নতুন সার্ভার যোগ করলে বা কোন সার্ভার ডাউন হয়ে গেলে অন্যান্য সার্ভারের উপর যতটা সম্ভব কম প্রভাব পরে। এই লেখায় আমি বেসিক হ্যাশিং নিয়ে তেমন আলোচনা করবো না, আমি আলোচনা করবো কনসিস্টেন্ট হ্যাশিং কিভাবে কাজ করে এবং কি ধরণের সমস্যা সমাধান করতে এটা কাজে লাগে সেটা নিয়ে। শুরুতেই অ্যালগরিদম বর্ণনা করা আগে আমি কিছু ব্যাকগ্রাউন্ড দিয়ে শুরু করবো যাতে তুমি বুঝতে পারো ঠিক কোন সমস্যা সমাধান করার জন্য এটা ব্যবহার করা হয়। কনসিস্টেন্ট হ্যাশিং এর একটা খুবই কমন ব্যবহার হলো ডিস্ট্রিবি...</div>
-                    </div>
-                    <div class="card-footer">
-                        <a href="#">Edit</a>
-                        <a href="#">Delete</a>
-                    </div>
-                </div>
-
-            </div>
-            <div class="col">
-                <div class="card">
-                    <div class="card-body my-blog-text">
-                        <p class="card-title" style="font-weight: bold;">কনসিস্টেন্ট হ্যাশিং সার্ভারে লোড ব্যালেন্স করার একটি অ্যালগরিদম।</p>
-
-                        <div class="card-text "> এটা ব্যবহার করে নিশ্চিত করা হয় ডিস্ট্রিবিউটেড সিস্টেমে নতুন সার্ভার যোগ করলে বা কোন সার্ভার ডাউন হয়ে গেলে অন্যান্য সার্ভারের উপর যতটা সম্ভব কম প্রভাব পরে। এই লেখায় আমি বেসিক হ্যাশিং নিয়ে তেমন আলোচনা করবো না, আমি আলোচনা করবো কনসিস্টেন্ট হ্যাশিং কিভাবে কাজ করে এবং কি ধরণের সমস্যা সমাধান করতে এটা কাজে লাগে সেটা নিয়ে। শুরুতেই অ্যালগরিদম বর্ণনা করা আগে আমি কিছু ব্যাকগ্রাউন্ড দিয়ে শুরু করবো যাতে তুমি বুঝতে পারো ঠিক কোন সমস্যা সমাধান করার জন্য এটা ব্যবহার করা হয়। কনসিস্টেন্ট হ্যাশিং এর একটা খুবই কমন ব্যবহার হলো ডিস্ট্রিবি...</div>
-                    </div>
-                    <div class="card-footer">
-                        <a href="#">Edit</a>
-                        <a href="#">Delete</a>
-                    </div>
-                </div>
-
-            </div>
-            <div class="col">
-                <div class="card">
-                    <div class="card-body my-blog-text">
-                        <p class="card-title" style="font-weight: bold;">কনসিস্টেন্ট হ্যাশিং সার্ভারে লোড ব্যালেন্স করার একটি অ্যালগরিদম।</p>
-
-                        <div class="card-text "> এটা ব্যবহার করে নিশ্চিত করা হয় ডিস্ট্রিবিউটেড সিস্টেমে নতুন সার্ভার যোগ করলে বা কোন সার্ভার ডাউন হয়ে গেলে অন্যান্য সার্ভারের উপর যতটা সম্ভব কম প্রভাব পরে। এই লেখায় আমি বেসিক হ্যাশিং নিয়ে তেমন আলোচনা করবো না, আমি আলোচনা করবো কনসিস্টেন্ট হ্যাশিং কিভাবে কাজ করে এবং কি ধরণের সমস্যা সমাধান করতে এটা কাজে লাগে সেটা নিয়ে। শুরুতেই অ্যালগরিদম বর্ণনা করা আগে আমি কিছু ব্যাকগ্রাউন্ড দিয়ে শুরু করবো যাতে তুমি বুঝতে পারো ঠিক কোন সমস্যা সমাধান করার জন্য এটা ব্যবহার করা হয়। কনসিস্টেন্ট হ্যাশিং এর একটা খুবই কমন ব্যবহার হলো ডিস্ট্রিবি...</div>
-                    </div>
-                    <div class="card-footer">
-                        <a href="#">Edit</a>
-                        <a href="#">Delete</a>
-                    </div>
-                </div>
-
-            </div>
-            <div class="col">
-                <div class="card">
-                    <div class="card-body my-blog-text">
-                        <p class="card-title" style="font-weight: bold;">কনসিস্টেন্ট হ্যাশিং সার্ভারে লোড ব্যালেন্স করার একটি অ্যালগরিদম।</p>
-
-                        <div class="card-text "> এটা ব্যবহার করে নিশ্চিত করা হয় ডিস্ট্রিবিউটেড সিস্টেমে নতুন সার্ভার যোগ করলে বা কোন সার্ভার ডাউন হয়ে গেলে অন্যান্য সার্ভারের উপর যতটা সম্ভব কম প্রভাব পরে। এই লেখায় আমি বেসিক হ্যাশিং নিয়ে তেমন আলোচনা করবো না, আমি আলোচনা করবো কনসিস্টেন্ট হ্যাশিং কিভাবে কাজ করে এবং কি ধরণের সমস্যা সমাধান করতে এটা কাজে লাগে সেটা নিয়ে। শুরুতেই অ্যালগরিদম বর্ণনা করা আগে আমি কিছু ব্যাকগ্রাউন্ড দিয়ে শুরু করবো যাতে তুমি বুঝতে পারো ঠিক কোন সমস্যা সমাধান করার জন্য এটা ব্যবহার করা হয়। কনসিস্টেন্ট হ্যাশিং এর একটা খুবই কমন ব্যবহার হলো ডিস্ট্রিবি...</div>
-                    </div>
-                    <div class="card-footer">
-                        <a href="#">Edit</a>
-                        <a href="#">Delete</a>
-                    </div>
-                </div>
-
-            </div>
-            <div class="col">
-                <div class="card">
-                    <div class="card-body my-blog-text">
-                        <p class="card-title" style="font-weight: bold;">কনসিস্টেন্ট হ্যাশিং সার্ভারে লোড ব্যালেন্স করার একটি অ্যালগরিদম।</p>
-
-                        <div class="card-text "> এটা ব্যবহার করে নিশ্চিত করা হয় ডিস্ট্রিবিউটেড সিস্টেমে নতুন সার্ভার যোগ করলে বা কোন সার্ভার ডাউন হয়ে গেলে অন্যান্য সার্ভারের উপর যতটা সম্ভব কম প্রভাব পরে। এই লেখায় আমি বেসিক হ্যাশিং নিয়ে তেমন আলোচনা করবো না, আমি আলোচনা করবো কনসিস্টেন্ট হ্যাশিং কিভাবে কাজ করে এবং কি ধরণের সমস্যা সমাধান করতে এটা কাজে লাগে সেটা নিয়ে। শুরুতেই অ্যালগরিদম বর্ণনা করা আগে আমি কিছু ব্যাকগ্রাউন্ড দিয়ে শুরু করবো যাতে তুমি বুঝতে পারো ঠিক কোন সমস্যা সমাধান করার জন্য এটা ব্যবহার করা হয়। কনসিস্টেন্ট হ্যাশিং এর একটা খুবই কমন ব্যবহার হলো ডিস্ট্রিবি...</div>
-                    </div>
-                    <div class="card-footer">
-                        <a href="#">Edit</a>
-                        <a href="#">Delete</a>
-                    </div>
-                </div>
-
-            </div>
-            <div class="col">
-                <div class="card">
-                    <div class="card-body my-blog-text">
-                        <p class="card-title" style="font-weight: bold;">কনসিস্টেন্ট হ্যাশিং সার্ভারে লোড ব্যালেন্স করার একটি অ্যালগরিদম।</p>
-
-                        <div class="card-text "> এটা ব্যবহার করে নিশ্চিত করা হয় ডিস্ট্রিবিউটেড সিস্টেমে নতুন সার্ভার যোগ করলে বা কোন সার্ভার ডাউন হয়ে গেলে অন্যান্য সার্ভারের উপর যতটা সম্ভব কম প্রভাব পরে। এই লেখায় আমি বেসিক হ্যাশিং নিয়ে তেমন আলোচনা করবো না, আমি আলোচনা করবো কনসিস্টেন্ট হ্যাশিং কিভাবে কাজ করে এবং কি ধরণের সমস্যা সমাধান করতে এটা কাজে লাগে সেটা নিয়ে। শুরুতেই অ্যালগরিদম বর্ণনা করা আগে আমি কিছু ব্যাকগ্রাউন্ড দিয়ে শুরু করবো যাতে তুমি বুঝতে পারো ঠিক কোন সমস্যা সমাধান করার জন্য এটা ব্যবহার করা হয়। কনসিস্টেন্ট হ্যাশিং এর একটা খুবই কমন ব্যবহার হলো ডিস্ট্রিবি...</div>
-                    </div>
-                    <div class="card-footer">
-                        <a href="#">Edit</a>
-                        <a href="#">Delete</a>
-                    </div>
-                </div>
-
-            </div>
-            <div class="col">
-                <div class="card">
-                    <div class="card-body my-blog-text">
-                        <p class="card-title" style="font-weight: bold;">কনসিস্টেন্ট হ্যাশিং সার্ভারে লোড ব্যালেন্স করার একটি অ্যালগরিদম।</p>
-
-                        <div class="card-text "> এটা ব্যবহার করে নিশ্চিত করা হয় ডিস্ট্রিবিউটেড সিস্টেমে নতুন সার্ভার যোগ করলে বা কোন সার্ভার ডাউন হয়ে গেলে অন্যান্য সার্ভারের উপর যতটা সম্ভব কম প্রভাব পরে। এই লেখায় আমি বেসিক হ্যাশিং নিয়ে তেমন আলোচনা করবো না, আমি আলোচনা করবো কনসিস্টেন্ট হ্যাশিং কিভাবে কাজ করে এবং কি ধরণের সমস্যা সমাধান করতে এটা কাজে লাগে সেটা নিয়ে। শুরুতেই অ্যালগরিদম বর্ণনা করা আগে আমি কিছু ব্যাকগ্রাউন্ড দিয়ে শুরু করবো যাতে তুমি বুঝতে পারো ঠিক কোন সমস্যা সমাধান করার জন্য এটা ব্যবহার করা হয়। কনসিস্টেন্ট হ্যাশিং এর একটা খুবই কমন ব্যবহার হলো ডিস্ট্রিবি...</div>
-                    </div>
-                    <div class="card-footer">
-                        <a href="#">Edit</a>
-                        <a href="#">Delete</a>
-                    </div>
-                </div>
-
-            </div>
+                        </div>
+            <?php }
+                }
+            }
+            ?>
         </div>
+
+
+
         <!-- my posts section  -->
     </div>
 </div>
